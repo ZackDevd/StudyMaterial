@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Material</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="assets/icons/site.webmanifest">
+
+
+
+  <style>
+    /* Old Money Color Palette */
+    :root {
+      --ivory: #fbfaf5;
+      --deep-green: #1f3b2c;
+      --muted-gold: #c0aa83;
+      --soft-gray: #d6d5cf;
+      --text-dark: #1c1b18;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Georgia", serif;
+      background-color: var(--ivory);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.6rem;
+      font-weight: 600;
+      margin: 40px 0 15px;
+      color: var(--deep-green);
+      letter-spacing: 1.2px;
+    }
+
+    hr {
+      width: 60%;
+      margin: 0 auto 40px;
+      border: none;
+      border-top: 1px solid var(--soft-gray);
+    }
+
+    /* Navigation */
+    .ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      list-style: none;
+      padding: 0 15px;
+      margin-bottom: 40px;
+    }
+
+    .ul li a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--deep-green);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 1.5px;
+      background-color: var(--muted-gold);
+      transition: width 0.3s ease;
+    }
+
+    .ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* Sections */
+    section {
+      max-width: 850px;
+      margin: 0 auto 50px;
+      padding: 25px;
+      border: 1px solid var(--soft-gray);
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--deep-green);
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--soft-gray);
+      padding-bottom: 8px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin: 20px 0 10px;
+      color: var(--text-dark);
+      font-size: 1.05rem;
+    }
+
+    .download-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+      padding: 12px 15px;
+      background: var(--ivory);
+      border-radius: 5px;
+      border: 1px solid var(--soft-gray);
+      transition: background 0.3s ease;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .download-item:hover {
+      background: #f3f2ec;
+    }
+
+    .download-item span {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    /* Buttons */
+    .btn-download,
+    .btn-na {
+      padding: 8px 22px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .btn-download {
+      background: transparent;
+      color: var(--deep-green);
+      border: 1.5px solid var(--deep-green);
+      cursor: pointer;
+    }
+
+    .btn-download:hover {
+      background: var(--deep-green);
+      color: var(--ivory);
+    }
+
+    .btn-na {
+      background: transparent;
+      color: #9b9a95;
+      border: 1.5px solid var(--soft-gray);
+      cursor: not-allowed;
+    }
+
+    /* Custom Alert Modal */
+    .alert-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(28, 27, 24, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .alert-box {
+      background: var(--ivory);
+      border: 1px solid var(--muted-gold);
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 90%;
+      text-align: center;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .alert-box h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      color: var(--deep-green);
+      font-weight: 600;
+    }
+
+    .alert-box p {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      margin-bottom: 15px;
+    }
+
+    .alert-btn {
+      background: var(--deep-green);
+      color: var(--ivory);
+      border: none;
+      padding: 8px 22px;
+      font-size: 0.85rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .alert-btn:hover {
+      background: var(--muted-gold);
+      color: var(--text-dark);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .ul {
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      section {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .ul li a {
+        font-size: 0.9rem;
+      }
+
+      .download-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn-download,
+      .btn-na {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.6rem;
+        margin: 25px 0 10px;
+      }
+
+      section h2 {
+        font-size: 1.2rem;
+      }
+
+      label {
+        font-size: 1rem;
+      }
+
+      .download-item span {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- your body content stays same as you pasted -->
+  <h1>TYBCA Material</h1>
+  <hr />
+
+  <ul class="ul">
+    <li><a href="#nt">NT</a></li>
+    <li><a href="#awd">AWD</a></li>
+    <li><a href="#wfs">WFS</a></li>
+    <li><a href="#los">LOS</a></li>
+    <li><a href="#dotnet">.Net</a></li>
+    <li><a href="#sec">SEC</a></li>
+    <li><a href="#cc">CC</a></li>
+  </ul>
+
+  <!-- NT Section -->
+  <section id="nt">
+    <h2>NT Material</h2>
+    <div class="content-block">
+      <label>PDF's</label>
+      <div class="download-item">
+        <span>Unit - 1: Introduction to Network</span>
+        <a href="Material/NT/[NT] Unit - 1.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Unit - 2: Internet & Intranet</span>
+        <a href="Material/NT/[NT] Unit - 2.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Unit - 3: Mobile Ad HOC Network</span>
+        <a href="Material/NT/[NT] Unit - 3.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Unit - 4: Mail Services</span>
+        <a href="Material/NT/[NT] Unit - 4.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+    </div>
+    <div class="content-block">
+      <label>Assignments</label>
+      <div class="download-item">
+        <span>Assignment - 1</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+      <div class="download-item">
+        <span>Assignment - 2</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWD Section -->
+  <section id="awd">
+    <h2>AWD Material</h2>
+    <div class="content-block">
+      <label>PDF's</label>
+      <div class="download-item">
+        <span>Unit - 1</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+      <div class="download-item">
+        <span>Unit - 2</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+    </div>
+    <div class="content-block">
+      <label>Assignments</label>
+      <div class="download-item">
+        <span>Assignment - 1</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+      <div class="download-item">
+        <span>Assignment - 2</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WFS Section -->
+  <section id="wfs">
+    <h2>WFS Material</h2>
+    <div class="content-block">
+      <label>PDF's</label>
+      <div class="download-item">
+        <span>Unit - 1: Core PHP Programming</span>
+        <a href="Material/WFS/[WFS] Unit - 1.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Unit - 2: Advanced PHP and File Management</span>
+        <a href="Material/WFS/[WFS] Unit - 2.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Unit - 3: Database Interaction And code igniter FrameWork</span>
+        <a href="Material/WFS/[WFS] Unit - 2.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+    </div>
+    <div class="content-block">
+      <label>Assignments</label>
+      <div class="download-item">
+        <span>Assignment - 1</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+      <div class="download-item">
+        <span>Assignment - 2</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOS Section -->
+  <section id="los">
+    <h2>LOS Material</h2>
+    <div class="content-block">
+      <label>PDF's</label>
+      <div class="download-item">
+        <span>Unit - 1: Introduction To Linux Operating System</span>
+        <a href="Material/LOS/[LOS] Unit - 1.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Unit - 2: Basic Linux Commands</span>
+        <a href="Material/LOS/[LOS] Unit - 2.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Unit - 3: Shell Scripting In Linux</span>
+        <a href="Material/LOS/[LOS] Unit - 3.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Unit - 4: Advanced Text Processing Tools</span>
+        <a href="Material/LOS/[LOS] Unit - 4.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+    </div>
+    <div class="content-block">
+      <label>Assignments</label>
+      <div class="download-item">
+        <span>Assignment - 1</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+      <div class="download-item">
+        <span>Assignment - 2</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- .Net Section -->
+  <section id="dotnet">
+    <h2>.Net Material</h2>
+    <div class="content-block">
+      <label>PDF's</label>
+      <div class="download-item">
+        <span>Unit - 1: Introduction to ASP.NET</span>
+        <a href="Material/ASP/[ASP] Unit  - 1.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Unit - 2: Database Access And Client-Server Communications</span>
+        <a href="Material/ASP/[ASP] Unit  - 2.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Unit - 3: Advanced ASP.NET</span>
+        <a href="Material/ASP/[ASP] Unit  - 3.pdf" download><button class="btn-download">Download</button></a>
+      </div>
+      <div class="download-item">
+        <span>Validation Control</span>
+        <a href="Material/ASP/[ASP.NET] Validation Control.pdf" download><button
+            class="btn-download">Download</button></a>
+      </div>
+    </div>
+    <div class="content-block">
+      <label>Assignments</label>
+      <div class="download-item">
+        <span>Assignment - 1</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+      <div class="download-item">
+        <span>Assignment - 2</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEC Section -->
+  <section id="sec">
+    <h2>SEC Material</h2>
+    <div class="content-block">
+      <label>PDF's</label>
+      <div class="download-item">
+        <span>Unit - 1</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+      <div class="download-item">
+        <span>Unit - 2</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+    </div>
+    <div class="content-block">
+      <label>Assignments</label>
+      <div class="download-item">
+        <span>Assignment - 1</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+      <div class="download-item">
+        <span>Assignment - 2</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CC Section -->
+  <section id="cc">
+    <h2>CC Material</h2>
+    <div class="content-block">
+      <label>PDF's</label>
+      <div class="download-item">
+        <span>Unit - 1</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+      <div class="download-item">
+        <span>Unit - 2</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+    </div>
+    <div class="content-block">
+      <label>Assignments</label>
+      <div class="download-item">
+        <span>Assignment - 1</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+      <div class="download-item">
+        <span>Assignment - 2</span>
+        <button class="btn-na" onclick="fileNotAvailable()">
+          Not Available
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom Alert -->
+  <div id="customAlert" class="alert-overlay">
+    <div class="alert-box">
+      <h3>📂 File Missing</h3>
+      <p>This file is not available yet. Please check back later.</p>
+      <button class="alert-btn" onclick="closeAlert()">Okay</button>
+    </div>
+  </div>
+
+  <script>
+    function fileNotAvailable() {
+      document.getElementById("customAlert").style.display = "flex";
+    }
+
+    function closeAlert() {
+      document.getElementById("customAlert").style.display = "none";
+    }
+  </script>
+</body>
+
+</html>
