@@ -1,2 +1,2 @@
 # StudyMaterial
-This is A Repo For Study Materials
+This is A Repo For Study Materials.
