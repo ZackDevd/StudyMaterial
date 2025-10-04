@@ -1,0 +1,240 @@
+/* ===============================
+   VARIABLES
+=============================== */
+:root {
+  --font-primary: 'Poppins', sans-serif;
+  --color-bg-gradient-start: #f9fafc;
+  --color-bg-gradient-end: #f0f2f5;
+  --color-primary: #1f3b2c;
+  --color-secondary: #2c5545;
+  --color-accent: #c0aa83;
+  --color-text: #1c1b18;
+  --color-card-border: #ddd;
+  --color-card-shadow: rgba(0, 0, 0, 0.08);
+  --color-footer-bg: #1f3b2c;
+  --color-footer-text: #f5f5f5;
+  --scroll-btn-bg: var(--color-secondary);
+  --scroll-btn-color: white;
+  --scroll-btn-size: 45px;
+  --scroll-btn-radius: 50%;
+  --scroll-btn-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* ===============================
+   GLOBAL STYLES
+=============================== */
+body {
+  font-family: var(--font-primary);
+  background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-end));
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* ===============================
+   NAVBAR
+=============================== */
+.navbar {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--color-accent) !important;
+}
+
+/* ===============================
+   HERO SECTION
+=============================== */
+.hero {
+  background: url('https://images.unsplash.com/photo-1529101091764-c3526daf38fe?ixlib=rb-4.0.3&q=80&auto=format&fit=crop&w=1950') no-repeat center/cover;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  color: white;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(31, 59, 44, 0.6);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(8px);
+  padding: 30px 20px;
+  border-radius: 15px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* ===============================
+   CARD LAYOUT
+=============================== */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  justify-content: start;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.material-card {
+  background: #fff;
+  border: 1px solid var(--color-card-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px var(--color-card-shadow);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.material-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.material-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  color: var(--color-primary);
+}
+
+.material-card p {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.btn-download {
+  border-radius: 50px;
+  padding: 10px 18px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-secondary);
+  color: var(--color-secondary);
+  background: transparent;
+}
+
+.btn-download:hover {
+  background: var(--color-secondary);
+  color: white;
+  border-color: var(--color-secondary);
+}
+
+/* ===============================
+   SECTION TITLES
+=============================== */
+section h2 {
+  margin-top: 50px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* ===============================
+   FOOTER
+=============================== */
+footer {
+  background: var(--color-footer-bg);
+  color: var(--color-footer-text);
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* ===============================
+   SCROLL TO TOP BUTTON
+=============================== */
+#scrollTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999;
+  width: var(--scroll-btn-size);
+  height: var(--scroll-btn-size);
+  background-color: var(--scroll-btn-bg);
+  color: var(--scroll-btn-color);
+  border: none;
+  border-radius: var(--scroll-btn-radius);
+  box-shadow: var(--scroll-btn-shadow);
+  cursor: pointer;
+  font-size: 24px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  transition: all 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+  background-color: var(--color-primary);
+}
+
+/* ===============================
+   RESPONSIVE
+=============================== */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .hero p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 50vh;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    justify-content: start;
+  }
+
+  #scrollTopBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+}
